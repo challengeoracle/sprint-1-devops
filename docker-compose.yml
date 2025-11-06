@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  medix-api:
+    # Instrução para construir a imagem usando o Dockerfile na pasta atual
+    build: .
+    # Comando para iniciar (já definido no Dockerfile)
+    command: java -jar app.jar
+
+    # Execução em background é gerenciada pelo comando 'docker-compose up -d'
+
+    # Mapeia a porta do host (VM) para a porta do contêiner
+    # Se sua VM tiver o IP Público A.B.C.D, a API estará acessível em A.B.C.D:8080
+    ports:
+      - "8080:8080"
+
+      # Se você precisar de persistência de dados fora do contêiner, adicione aqui:
+      # volumes:
+      #   - dados-oracle:/mnt/oracle_wallet # Exemplo de volume para arquivos Oracle
+
+    restart: always # Tenta reiniciar em caso de falha, garantindo a saúde do serviço
+
+    # Variáveis de ambiente sensíveis (DB e JWT)
+    environment:
+      # Valores do application.yml serão sobrescritos se existirem
+      SPRING_DATASOURCE_URL: ${DB_URL}
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASS}
+      SERVER_PORT: 8080 # Já em 8080, apenas para garantir
+      JWT_SECRET: ${JWT_SECRET_KEY}
+
+# volumes:
+#  dados-oracle:

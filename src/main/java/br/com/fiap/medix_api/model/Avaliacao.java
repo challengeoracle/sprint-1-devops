@@ -22,7 +22,9 @@ import java.time.LocalTime;
 public class Avaliacao extends RepresentationModel<Avaliacao> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // ATUALIZADO: De IDENTITY para SEQUENCE
+    @SequenceGenerator(name = "seq_avaliacao", sequenceName = "SQ_MEDI_AVALIACAO", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_avaliacao")
     @Column(name = "id_avaliacao")
     private Long id;
 

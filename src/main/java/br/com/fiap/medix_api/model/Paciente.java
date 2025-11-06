@@ -26,7 +26,7 @@ public class Paciente extends Usuario {
 
     @NotNull(message = "O tipo sanguíneo não pode ser nulo.")
     @Enumerated(EnumType.STRING)
-    @Column(name = "tp_sanguineo", nullable = false, length = 3)
+    @Column(name = "tp_sanguineo", nullable = false, length = 20)
     private TipoSanguineo tipoSanguineo;
 
     @NotNull(message = "O gênero não pode ser nulo.")

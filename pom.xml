@@ -44,17 +44,17 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
+			<groupId>com.oracle.database.jdbc</groupId>
+			<artifactId>ojdbc11</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!-- JWT (jjwt) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -104,9 +104,9 @@
 							<version>1.18.34</version>
 						</path>
 					</annotationProcessorPaths>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
+					<source>8</source>
+					<target>8</target>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

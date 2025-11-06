@@ -20,7 +20,9 @@ import java.time.LocalDateTime;
 public class UnidadeSaude extends RepresentationModel<UnidadeSaude> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // ATUALIZADO: De IDENTITY para SEQUENCE
+    @SequenceGenerator(name = "seq_unidade_saude", sequenceName = "SQ_MEDI_UNIDADE_SAUDE", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_unidade_saude")
     @Column(name = "id_unidade_saude")
     private Long id;
 

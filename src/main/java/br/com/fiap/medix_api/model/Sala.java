@@ -21,7 +21,9 @@ import org.hibernate.annotations.Where;
 public class Sala {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // ATUALIZADO: De IDENTITY para SEQUENCE
+    @SequenceGenerator(name = "seq_sala", sequenceName = "SQ_MEDI_SALA", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_sala")
     @Column(name = "id_sala")
     private Long id;
 

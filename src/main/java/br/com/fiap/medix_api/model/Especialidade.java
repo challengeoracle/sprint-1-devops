@@ -16,7 +16,9 @@ import org.springframework.hateoas.RepresentationModel;
 public class Especialidade extends RepresentationModel<Especialidade> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // ATUALIZADO: De IDENTITY para SEQUENCE
+    @SequenceGenerator(name = "seq_especialidade", sequenceName = "SQ_MEDI_ESPECIALIDADE", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_especialidade")
     @Column(name = "id_especialidade")
     private Long id;
 
