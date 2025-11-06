@@ -68,8 +68,8 @@ Defina as seguintes variáveis de ambiente — **substitua os valores de `DB_PAS
 ```bash
 # Credenciais do Banco de Dados Oracle
 export DB_URL="jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL"
-export DB_USER="rm559728"
-export DB_PASS="250306"
+export DB_USER="rm*****"
+export DB_PASS="senha"
 
 # Chave Secreta JWT
 export JWT_SECRET_KEY="aec3ec1f-53aa-4e82-93e7-702ab0194b80"
