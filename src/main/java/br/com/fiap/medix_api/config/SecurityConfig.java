@@ -32,7 +32,11 @@ public class SecurityConfig {
                         // Rotas Públicas (acesso a qualquer um, mesmo não autenticado)
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
-                        .requestMatchers("/avaliacoes/**").permitAll() // IoT (ESP32)
+
+                        // Rotas LIBERADAS PARA DEMONSTRAÇÃO (Tudo em Avaliações e Especialidades)
+                        .requestMatchers("/avaliacoes/**").permitAll() // Inclui CRUD demo e normal
+                        .requestMatchers("/especialidades/**").permitAll() // CORREÇÃO: Inclui CRUD demo e normal
+
                         // Libera o acesso ao Swagger/OpenAPI
                         .requestMatchers(
                                 "/swagger-ui.html",
@@ -42,16 +46,11 @@ public class SecurityConfig {
                         ).permitAll()
 
                         // Rotas de ACESSO GERAL (Qualquer usuário autenticado - Paciente ou Colaborador)
-                        // Permite que Pacientes vejam as unidades por lista e por ID
                         .requestMatchers(HttpMethod.GET, "/unidades").authenticated()
                         .requestMatchers(HttpMethod.GET, "/unidades/{id}").authenticated()
 
                         // Rotas de Agendamento (Todos os autenticados podem usar o fluxo)
-                        .requestMatchers("/agendamentos/disponibilidade/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/agendamentos").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/agendamentos/**").authenticated()
-                        .requestMatchers(HttpMethod.PATCH, "/agendamentos/**").authenticated()
-                        .requestMatchers(HttpMethod.DELETE, "/agendamentos/**").authenticated()
+                        .requestMatchers("/agendamentos/**").authenticated()
 
                         // Rotas de GESTÃO (Apenas Colaborador)
                         // CRUD de Colaboradores (Total)
