@@ -1,59 +1,49 @@
 server:
-  port: ${SERVER_PORT:8080}
-  servlet:
-    context-path: /api
+    port: ${SERVER_PORT:8080}
+    servlet:
+        context-path: /api
 
 spring:
-  application:
-    name: medix
+    application:
+        name: medix
 
-  sql:
-    init:
-      # Não executa scripts de inicialização (as tabelas já existem)
-      mode: never
+    sql:
+        init:
+            # ATUALIZADO: Impede que o data.sql seja executado.
+            mode: never
 
-  jpa:
-    defer-datasource-initialization: true
-    database-platform: org.hibernate.dialect.OracleDialect
-    hibernate:
-      # Apenas valida o schema — não cria nem apaga tabelas
-      ddl-auto: validate
-    show-sql: false
-    properties:
-      hibernate:
-        format_sql: false
+    jpa:
+        defer-datasource-initialization: true
+        database-platform: org.hibernate.dialect.OracleDialect
+        hibernate:
+            # ATUALIZADO: Apenas valida se as tabelas existem, sem apagar/criar.
+            ddl-auto: validate
 
-  datasource:
-    url: jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL
-    username: rm559728
-    password: 250306
-    driver-class-name: oracle.jdbc.OracleDriver
-    hikari:
-      # Mantém o pool mínimo possível para evitar erro de limite de sessões
-      maximum-pool-size: 2
-      minimum-idle: 0
-      idle-timeout: 20000       # Fecha conexões ociosas após 20s
-      max-lifetime: 300000      # Fecha conexões a cada 5 minutos
-      connection-timeout: 10000 # Tempo máximo pra tentar pegar uma conexão
-      validation-timeout: 3000
-      connection-test-query: SELECT 1 FROM DUAL
+        # ATUALIZADO: Desliga os logs do SQL no console
+        show-sql: false
+        properties:
+            hibernate:
+                format_sql: false
 
-  devtools:
-    restart:
-      enabled: false # Impede reinicializações automáticas (evita novas conexões)
+    datasource:
+        # Seus dados de conexão
+        url: jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL
+        username: rm559728
+        password: 250306
+        driver-class-name: oracle.jdbc.driver.OracleDriver
+
+    devtools:
+        restart:
+            enabled: true
 
 jwt:
-  secret: aec3ec1f-53aa-4e82-93e7-702ab0194b80
-  expiration: 86400000
+    secret: aec3ec1f-53aa-4e82-93e7-702ab0194b80
+    expiration: 86400000
 
 logging:
-  level:
-    # Logs normais
-    org.hibernate: WARN
-    org.springframework.security: DEBUG
-    org.springframework.web.filter: DEBUG
-    br.com.fiap.medix_api.config: DEBUG
-
-    # Mostra quando o Hikari abre ou fecha conexões
-    com.zaxxer.hikari.HikariConfig: DEBUG
-    com.zaxxer.hikari: DEBUG
+    level:
+        # Mantendo WARN para logs do Hibernate e DEBUG para segurança.
+        org.hibernate: WARN
+        org.springframework.security: DEBUG
+        org.springframework.web.filter: DEBUG
+        br.com.fiap.medix_api.config: DEBUG

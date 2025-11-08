@@ -20,13 +20,13 @@ services:
 
     restart: always # Tenta reiniciar em caso de falha, garantindo a saúde do serviço
 
-    # Variáveis de ambiente sensíveis (DB e JWT)
+
     environment:
-      # Valores do application.yml serão sobrescritos se existirem
+
       SPRING_DATASOURCE_URL: ${DB_URL}
       SPRING_DATASOURCE_USERNAME: ${DB_USER}
       SPRING_DATASOURCE_PASSWORD: ${DB_PASS}
-      SERVER_PORT: 8080 # Já em 8080, apenas para garantir
+      SERVER_PORT: 8080
       JWT_SECRET: ${JWT_SECRET_KEY}
 
 # volumes:
