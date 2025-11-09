@@ -7,18 +7,17 @@ FROM maven:3.9-eclipse-temurin-21 AS builder
 # Diretório de trabalho padrão
 WORKDIR /app
 
-# Copia arquivos necessários para o build e aproveita o cache
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-# Baixa as dependências.
-RUN ./mvnw dependency:go-offline
-
-# Copia o código-fonte e compila
+# Copia APENAS o pom.xml e a pasta src. 
+# Removida a cópia de .mvn/ e mvnw para evitar o erro.
+COPY pom.xml ./
 COPY src ./src
-RUN ./mvnw package -DskipTests
+
+# Baixa as dependências e compila usando o 'mvn' JÁ INSTALADO na imagem base.
+RUN mvn dependency:go-offline
+RUN mvn package -DskipTests
 
 # ===================================================================
-# ESTÁGIO 2: RUN (Execução - Otimizado)
+# ESTÁGIO 2: RUN (Execução - Otimizado com Alpine)
 # Imagem baseada em JRE 21 Alpine (a menor disponível).
 # ===================================================================
 FROM eclipse-temurin:21-jre-alpine
