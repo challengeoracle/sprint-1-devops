@@ -2,12 +2,11 @@ version: '3.8'
 
 services:
   medix-api:
-    # Constrói a imagem a partir do Dockerfile no diretório atual ('.').
+    # O build buscará o Dockerfile no diretório '.'
     build: .
-    # Nome amigável para o contêiner.
     container_name: medix_api_container
     # Garante que o contêiner reinicie automaticamente.
     restart: always
-    # Mapeia a porta 80 da VM do Azure para a porta 8080 do contêiner.
+    # Mapeia a porta 80 da VM para a porta 8080 do contêiner.
     ports:
       - "80:8080"
