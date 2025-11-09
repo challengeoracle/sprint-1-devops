@@ -13,7 +13,7 @@ A aplicação foi implantada em uma **Máquina Virtual (VM)** do **Microsoft Azu
 
 | Categoria                       | Tecnologia             | Versão/Detalhes                                          |
 | :------------------------------ | :--------------------- | :------------------------------------------------------- |
-| **Linguagem**                   | Java                   | 21                                                       |
+| **Linguagem**                   | Java                   | 17                                                       |
 | **Framework**                   | Spring Boot            | 3.3.0                                                    |
 | **Gerenciador de Dependências** | Maven                  | Wrapper (`mvnw`)                                         |
 | **Banco de Dados**              | Oracle                 | Conexão via JDBC                                         |
@@ -60,7 +60,7 @@ cd sprint-1-java
 Execute o _build_ e o _deploy_ com Docker Compose:
 
 ```
-docker-compose up -d --build
+docker compose up -d
 ```
 
 Esse comando:
