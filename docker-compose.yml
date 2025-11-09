@@ -2,11 +2,28 @@ version: '3.8'
 
 services:
   medix-api:
-    # O build buscará o Dockerfile no diretório '.'
-    build: .
-    container_name: medix_api_container
-    # Garante que o contêiner reinicie automaticamente.
+    # Nome da imagem final a ser criada/utilizada
+    image: medix-api-oracle
+
+    # Configuração de build
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    # Nome do container e reinício automático (Requisito: Background)
+    container_name: medix-api-container
     restart: always
-    # Mapeia a porta 80 da VM para a porta 8080 do contêiner.
+
+    # Mapeia a porta 8080
     ports:
-      - "80:8080"
+      - "8080:8080"
+
+    # Variáveis de ambiente (Credenciais do Oracle DB)
+    environment:
+      - ORACLE_URL=jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL
+      - ORACLE_USER=rm559873
+      - ORACLE_PASS=270905
+
+      # JWT Secrets
+      - JWT_SECRET=aec3ec1f-53aa-4e82-93e7-702ab0194b80
+      - JWT_EXPIRATION=86400000
